@@ -10,7 +10,6 @@ provider "aws" {
 }
 
 resource "aws_security_group" "web_sg" {
-#    name        = "Web-Server-Security-Group"
     name_prefix        = "Web-Server-Security-Group-"
     description = "Allow TLS 80, 443 Security Group"
 
@@ -46,7 +45,6 @@ resource "aws_security_group" "web_sg" {
 }
 
 resource "aws_launch_configuration" "web-lc" {
-#    name          = "Web-Server-HA-LC-config"
     name_prefix          = "Web-Server-HA-LC-config-"
     image_id      = data.aws_ami.latest_ubuntu_20_x86-64.id
     instance_type = var.instance_type
@@ -59,7 +57,6 @@ resource "aws_launch_configuration" "web-lc" {
 }
 
 resource "aws_autoscaling_group" "web_asg" {
-#    name                      = "Web-Server-HA-ASG"
     name_prefix                      = "Web-Server-HA-ASG-"
     launch_configuration = aws_launch_configuration.web-lc.name
     max_size                  = 2
@@ -83,7 +80,6 @@ resource "aws_autoscaling_group" "web_asg" {
 
 resource "aws_elb" "web_elb" {
     name               = "Web-Server-ELB"
-#    name_prefix           = "Web-Server-ELB"
     availability_zones = [data.aws_availability_zones.available.names[0],data.aws_availability_zones.available.names[1]]
     security_groups = [aws_security_group.web_sg.id]
     listener {
