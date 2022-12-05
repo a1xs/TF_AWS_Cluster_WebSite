@@ -82,8 +82,8 @@ resource "aws_autoscaling_group" "web_asg" {
 }
 
 resource "aws_elb" "web_elb" {
-#    name               = "Web-Server-ELB"
-    name_prefix           = "Web-Server-ELB-"
+    name               = "Web-Server-ELB"
+#    name_prefix           = "Web-Server-ELB"
     availability_zones = [data.aws_availability_zones.available.names[0],data.aws_availability_zones.available.names[1]]
     security_groups = [aws_security_group.web_sg.id]
     listener {
