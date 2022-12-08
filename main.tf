@@ -54,6 +54,9 @@ resource "aws_launch_configuration" "web-lc" {
     lifecycle {
         create_before_destroy = true
     }
+    provisioner "local-exec" {
+        command= "echo AWS Instance create."
+    }
 }
 
 resource "aws_autoscaling_group" "web_asg" {
@@ -108,4 +111,11 @@ resource "aws_default_subnet" "default_az1" {
 
 resource "aws_default_subnet" "default_az2" {
     availability_zone = data.aws_availability_zones.available.names[1]
+}
+
+resource "null_resource" "command_linux" {
+    provisioner "local-exec" {
+        command= "$date >> log.txt"
+    }
+    depends_on = [aws_launch_configuration.web-lc]
 }
