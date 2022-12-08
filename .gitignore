@@ -1,6 +1,7 @@
 /variables.tfvars
 /terraform.tfstate
 /terraform.tfstate.backup
+/log.txt
 /.idea/
 /.terraform.lock.hcl
 /.terraform/
